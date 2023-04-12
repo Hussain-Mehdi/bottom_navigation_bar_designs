@@ -4,6 +4,9 @@ import 'package:flutter/src/widgets/placeholder.dart';
 
 import 'package:flutter/material.dart';
 
+import 'model/course_detail.dart';
+import 'utils/color.dart';
+
 class HomeScreen extends StatefulWidget {
   Container mainContainer = Container();
 
@@ -42,8 +45,14 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Row(
                 children: [
                   ...List.generate(
-                    5,
-                    (index) => const CourseCards(),
+                    4,
+                    (index) => CourseCards(
+                        courseDetail[index].courseName,
+                        courseDetail[index].courseDescription,
+                        courseDetail[index].courseImage,
+                        courseDetail[index].courseStatus,
+                        courseDetail[index].imagesBunch,
+                        cardColors[index]),
                   )
                 ],
               ),
@@ -174,9 +183,14 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class CourseCards extends StatelessWidget {
-  const CourseCards({
-    super.key,
-  });
+  String courseName;
+  String courseDescription;
+  String courseStatus;
+  String courseImage;
+  List<String> imagesBunch = [];
+  Color cardColor;
+  CourseCards(this.courseName, this.courseDescription, this.courseImage,
+      this.courseStatus, this.imagesBunch, this.cardColor);
 
   @override
   Widget build(BuildContext context) {
@@ -187,7 +201,7 @@ class CourseCards extends StatelessWidget {
         height: 230,
         width: 220,
         decoration: BoxDecoration(
-          color: Colors.amber,
+          color: cardColor,
           borderRadius: BorderRadius.circular(15),
         ),
         child: Row(
@@ -197,26 +211,26 @@ class CourseCards extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Course Name Here",
-                    style: TextStyle(
+                  Text(
+                    courseName,
+                    style: const TextStyle(
                         color: Color.fromARGB(195, 0, 0, 0),
                         fontSize: 17,
                         fontWeight: FontWeight.w600),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 8, bottom: 5),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8, bottom: 5),
                     child: Text(
-                      "This course will help you learn app development. Couse is designed by a good professor.",
-                      style: TextStyle(
+                      courseDescription,
+                      style: const TextStyle(
                           color: Color.fromARGB(195, 0, 0, 0),
                           fontSize: 12,
                           fontWeight: FontWeight.w400),
                     ),
                   ),
-                  const Text(
-                    "61 SECTIONS - 11 hours",
-                    style: TextStyle(
+                  Text(
+                    courseStatus,
+                    style: const TextStyle(
                         color: Color.fromARGB(195, 0, 0, 0),
                         fontSize: 12,
                         fontWeight: FontWeight.w500),
@@ -229,10 +243,10 @@ class CourseCards extends StatelessWidget {
                           3,
                           (index) => Transform.translate(
                                 offset: Offset((-15 * index).toDouble() - 5, 0),
-                                child: const CircleAvatar(
+                                child: CircleAvatar(
                                   backgroundColor: Colors.transparent,
                                   backgroundImage:
-                                      AssetImage("./images/circle.png"),
+                                      AssetImage(imagesBunch[index]),
                                 ),
                               ))
                     ],
@@ -243,9 +257,8 @@ class CourseCards extends StatelessWidget {
             Container(
               height: 50,
               width: 50,
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("./images/circle.png"))),
+              decoration: BoxDecoration(
+                  image: DecorationImage(image: AssetImage(courseImage))),
             ),
           ],
         ),
