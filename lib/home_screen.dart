@@ -13,20 +13,42 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  double width = 60;
+  double width = 65;
   double height = 95;
   double left = 7;
-  double previous = 7;
+  double previous = 8;
+  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        bottomNavigationBar: myBottomNavigationBar(), body: widget.mainContainer
-        // const SafeArea(
-        //     child: Center(
-        //   child: Text("Bottom Navigation Bar"),
-        // )),
-        );
+        bottomNavigationBar: myBottomNavigationBar(),
+        body: Center(
+          child: Container(
+            height: 200,
+            width: 200,
+            decoration: BoxDecoration(
+              color: Colors.amber,
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Text("Course Name Here"),
+                    Container(
+                      height: 50,
+                      width: 50,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage("./images/circle.png"))),
+                    )
+                  ],
+                )
+              ],
+            ),
+          ),
+        ));
   }
 
   Widget myBottomNavigationBar() {
@@ -46,7 +68,8 @@ class _HomeScreenState extends State<HomeScreen> {
             margin: EdgeInsets.only(left: left),
             width: 65,
             decoration: BoxDecoration(
-                color: Colors.amber, borderRadius: BorderRadius.circular(15)),
+                color: Color.fromARGB(64, 56, 179, 236),
+                borderRadius: BorderRadius.circular(15)),
           ),
           Align(
             alignment: Alignment.center,
@@ -55,31 +78,44 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 GestureDetector(
                     onTap: () {
+                      previous = 0;
                       positionTheBox(8);
                       mainScreen(0);
                     },
-                    child: const Icon(Icons.home_rounded)),
+                    child: const Icon(
+                      Icons.home_rounded,
+                      size: 25,
+                    )),
                 GestureDetector(
                     onTap: () {
-                      previous = 8;
+                      previous = 0;
                       positionTheBox(87);
                       mainScreen(1);
                     },
-                    child: const Icon(Icons.bookmark_rounded)),
+                    child: const Icon(
+                      Icons.bookmark_rounded,
+                      size: 25,
+                    )),
                 GestureDetector(
                     onTap: () {
                       previous = 85;
                       positionTheBox(167);
                       mainScreen(2);
                     },
-                    child: const Icon(Icons.search_rounded)),
+                    child: const Icon(
+                      Icons.search_rounded,
+                      size: 25,
+                    )),
                 GestureDetector(
                     onTap: () {
                       previous = 167;
                       positionTheBox(247);
                       mainScreen(3);
                     },
-                    child: const Icon(Icons.more_vert_rounded))
+                    child: const Icon(
+                      Icons.more_vert_rounded,
+                      size: 25,
+                    ))
               ],
             ),
           ),
