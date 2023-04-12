@@ -23,32 +23,33 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         bottomNavigationBar: myBottomNavigationBar(),
-        body: Center(
-          child: Container(
-            height: 200,
-            width: 200,
-            decoration: BoxDecoration(
-              color: Colors.amber,
-              borderRadius: BorderRadius.circular(15),
-            ),
+        body: SafeArea(
             child: Column(
-              children: [
-                Row(
-                  children: [
-                    Text("Course Name Here"),
-                    Container(
-                      height: 50,
-                      width: 50,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage("./images/circle.png"))),
-                    )
-                  ],
-                )
-              ],
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 28.0, left: 15),
+              child: Text(
+                "Courses",
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black87),
+              ),
             ),
-          ),
-        ));
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  ...List.generate(
+                    5,
+                    (index) => CourseCards(),
+                  )
+                ],
+              ),
+            )
+          ],
+        )));
   }
 
   Widget myBottomNavigationBar() {
@@ -169,5 +170,86 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       HomeScreen(mainContainer);
     });
+  }
+}
+
+class CourseCards extends StatelessWidget {
+  const CourseCards({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+        height: 230,
+        width: 220,
+        decoration: BoxDecoration(
+          color: Colors.amber,
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Course Name Here",
+                    style: TextStyle(
+                        color: Color.fromARGB(195, 0, 0, 0),
+                        fontSize: 17,
+                        fontWeight: FontWeight.w600),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 12, bottom: 8),
+                    child: Text(
+                      "This course will help you learn app development. Couse is designed by a good professor.",
+                      style: TextStyle(
+                          color: Color.fromARGB(195, 0, 0, 0),
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400),
+                    ),
+                  ),
+                  Text(
+                    "61 SECTIONS - 11 hours",
+                    style: TextStyle(
+                        color: Color.fromARGB(195, 0, 0, 0),
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  Spacer(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      ...List.generate(
+                          3,
+                          (index) => Transform.translate(
+                                offset: Offset((-15 * index).toDouble() - 5, 0),
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.transparent,
+                                  backgroundImage:
+                                      AssetImage("./images/circle.png"),
+                                ),
+                              ))
+                    ],
+                  )
+                ],
+              ),
+            ),
+            Container(
+              height: 50,
+              width: 50,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage("./images/circle.png"))),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
