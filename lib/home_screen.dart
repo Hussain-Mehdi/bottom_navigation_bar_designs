@@ -27,8 +27,8 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 28.0, left: 15),
+            const Padding(
+              padding: EdgeInsets.only(top: 28.0, left: 15),
               child: Text(
                 "Courses",
                 style: TextStyle(
@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   ...List.generate(
                     5,
-                    (index) => CourseCards(),
+                    (index) => const CourseCards(),
                   )
                 ],
               ),
@@ -183,7 +183,7 @@ class CourseCards extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
         height: 230,
         width: 220,
         decoration: BoxDecoration(
@@ -197,15 +197,15 @@ class CourseCards extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "Course Name Here",
                     style: TextStyle(
                         color: Color.fromARGB(195, 0, 0, 0),
                         fontSize: 17,
                         fontWeight: FontWeight.w600),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 12, bottom: 8),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 8, bottom: 5),
                     child: Text(
                       "This course will help you learn app development. Couse is designed by a good professor.",
                       style: TextStyle(
@@ -214,14 +214,14 @@ class CourseCards extends StatelessWidget {
                           fontWeight: FontWeight.w400),
                     ),
                   ),
-                  Text(
+                  const Text(
                     "61 SECTIONS - 11 hours",
                     style: TextStyle(
                         color: Color.fromARGB(195, 0, 0, 0),
                         fontSize: 12,
                         fontWeight: FontWeight.w500),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -229,7 +229,7 @@ class CourseCards extends StatelessWidget {
                           3,
                           (index) => Transform.translate(
                                 offset: Offset((-15 * index).toDouble() - 5, 0),
-                                child: CircleAvatar(
+                                child: const CircleAvatar(
                                   backgroundColor: Colors.transparent,
                                   backgroundImage:
                                       AssetImage("./images/circle.png"),
@@ -243,7 +243,7 @@ class CourseCards extends StatelessWidget {
             Container(
               height: 50,
               width: 50,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage("./images/circle.png"))),
             ),
