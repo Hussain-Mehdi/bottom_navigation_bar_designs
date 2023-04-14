@@ -1,25 +1,27 @@
 class Films {
-  String title;
-  String released;
-  String genre;
-  String plot;
-  String language;
-  String poster;
+  String titleFilm = '';
+  String releasedFilm = '';
+  String genreFilm = '';
+  String plotFilm = '';
+  String languageFilm = '';
+  String posterFilm = '';
   Films(
-      {required this.title,
-      required this.poster,
-      required this.language,
-      required this.genre,
-      required this.plot,
-      required this.released});
+      {required this.titleFilm,
+      required this.posterFilm,
+      required this.languageFilm,
+      required this.genreFilm,
+      required this.plotFilm,
+      required this.releasedFilm});
 
   factory Films.fromJson(Map<String, dynamic> json) {
+    print("Inside Json function===================");
     return Films(
-        title: json['title'],
-        poster: json['poster'],
-        language: json['language'],
-        genre: json['genre'],
-        plot: json['plot'],
-        released: json['released']);
+      titleFilm: json['Title'] ?? "No Title",
+      posterFilm: json['Poster'] ?? "No Data",
+      languageFilm: json['Language'] ?? "No Data",
+      genreFilm: json['Genre'] ?? "No Data",
+      plotFilm: json['Plot'] ?? "No Data",
+      releasedFilm: json['Released'] ?? "No data",
+    );
   }
 }
