@@ -25,40 +25,71 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
+        extendBody: true,
         bottomNavigationBar: myBottomNavigationBar(),
-        body: SafeArea(
-            child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Padding(
-              padding: EdgeInsets.only(top: 28.0, left: 15),
-              child: Text(
-                "Courses",
-                style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.black87),
+        body: SingleChildScrollView(
+          child: SafeArea(
+              child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(top: 28.0, left: 15),
+                child: Text(
+                  "Courses",
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.black87),
+                ),
               ),
-            ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  ...List.generate(
-                    4,
-                    (index) => CourseCards(
-                        courseDetail[index].courseName,
-                        courseDetail[index].courseDescription,
-                        courseDetail[index].courseImage,
-                        courseDetail[index].courseStatus,
-                        courseDetail[index].imagesBunch,
-                        cardColors[index]),
-                  )
-                ],
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    ...List.generate(
+                      4,
+                      (index) => CourseCards(
+                          courseDetail[index].courseName,
+                          courseDetail[index].courseDescription,
+                          courseDetail[index].courseImage,
+                          courseDetail[index].courseStatus,
+                          courseDetail[index].imagesBunch,
+                          cardColors[index]),
+                    )
+                  ],
+                ),
               ),
-            )
-          ],
-        )));
+              const Padding(
+                padding: EdgeInsets.only(top: 28.0, left: 15),
+                child: Text(
+                  "Recent",
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.black87),
+                ),
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Column(
+                  children: [
+                    ...List.generate(
+                      4,
+                      (index) => RecentCards(
+                          courseDetail[index].courseName,
+                          courseDetail[index].courseDescription,
+                          courseDetail[index].courseImage,
+                          courseDetail[index].courseStatus,
+                          courseDetail[index].imagesBunch,
+                          cardColors[index]),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          )),
+        ));
   }
 
   Widget myBottomNavigationBar() {
@@ -68,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
         width: MediaQuery.of(context).size.width,
         height: 55,
         decoration: BoxDecoration(
-          color: Colors.black12,
+          color: Color.fromARGB(255, 68, 68, 68),
           borderRadius: BorderRadius.circular(15),
         ),
         child: Stack(fit: StackFit.loose, children: [
@@ -95,6 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: const Icon(
                       Icons.home_rounded,
                       size: 25,
+                      color: Colors.white,
                     )),
                 GestureDetector(
                     onTap: () {
@@ -105,6 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: const Icon(
                       Icons.bookmark_rounded,
                       size: 25,
+                      color: Colors.white,
                     )),
                 GestureDetector(
                     onTap: () {
@@ -115,6 +148,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: const Icon(
                       Icons.search_rounded,
                       size: 25,
+                      color: Colors.white,
                     )),
                 GestureDetector(
                     onTap: () {
@@ -125,6 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: const Icon(
                       Icons.more_vert_rounded,
                       size: 25,
+                      color: Colors.white,
                     ))
               ],
             ),
@@ -254,6 +289,70 @@ class CourseCards extends StatelessWidget {
                 ],
               ),
             ),
+            Container(
+              height: 50,
+              width: 50,
+              decoration: BoxDecoration(
+                  image: DecorationImage(image: AssetImage(courseImage))),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class RecentCards extends StatelessWidget {
+  String courseName;
+  String courseDescription;
+  String courseStatus;
+  String courseImage;
+  List<String> imagesBunch = [];
+  Color cardColor;
+  RecentCards(this.courseName, this.courseDescription, this.courseImage,
+      this.courseStatus, this.imagesBunch, this.cardColor);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+        height: 80,
+        //width: 220,
+        decoration: BoxDecoration(
+          color: cardColor,
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              width: 60,
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    courseName,
+                    style: const TextStyle(
+                        color: Color.fromARGB(195, 0, 0, 0),
+                        fontSize: 17,
+                        fontWeight: FontWeight.w600),
+                  ),
+                  Text(
+                    courseStatus,
+                    style: const TextStyle(
+                        color: Color.fromARGB(195, 0, 0, 0),
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  const Spacer(),
+                ],
+              ),
+            ),
+            VerticalDivider(),
             Container(
               height: 50,
               width: 50,
