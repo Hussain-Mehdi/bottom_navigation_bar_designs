@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'home_screen.dart';
 import 'listviewwithheroeffect.dart';
-import 'mycard.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +11,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       home: UserListView(),

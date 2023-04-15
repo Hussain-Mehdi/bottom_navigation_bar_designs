@@ -1,7 +1,3 @@
-import 'package:bottom_navigation_bar_designs/main.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-
 import 'package:flutter/material.dart';
 
 import 'model/course_detail.dart';
@@ -10,7 +6,7 @@ import 'utils/color.dart';
 class HomeScreen extends StatefulWidget {
   Container mainContainer = Container();
 
-  HomeScreen(this.mainContainer);
+  HomeScreen(this.mainContainer, {super.key});
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -99,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
         width: MediaQuery.of(context).size.width,
         height: 55,
         decoration: BoxDecoration(
-          color: Color.fromARGB(255, 68, 68, 68),
+          color: const Color.fromARGB(255, 68, 68, 68),
           borderRadius: BorderRadius.circular(15),
         ),
         child: Stack(fit: StackFit.loose, children: [
@@ -109,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
             margin: EdgeInsets.only(left: left),
             width: 65,
             decoration: BoxDecoration(
-                color: Color.fromARGB(64, 56, 179, 236),
+                color: const Color.fromARGB(64, 56, 179, 236),
                 borderRadius: BorderRadius.circular(15)),
           ),
           Align(
@@ -182,25 +178,25 @@ class _HomeScreenState extends State<HomeScreen> {
     switch (screenID) {
       case 0:
         mainContainer = Container(
-            child: Center(
+            child: const Center(
           child: Text("Home Screen"),
         ));
         break;
       case 1:
         mainContainer = Container(
-            child: Center(
+            child: const Center(
           child: Text("Saved Data"),
         ));
         break;
       case 2:
         mainContainer = Container(
-            child: Center(
+            child: const Center(
           child: Text("Search"),
         ));
         break;
       case 3:
         mainContainer = Container(
-            child: Center(
+            child: const Center(
           child: Text("Options"),
         ));
         break;
@@ -225,7 +221,8 @@ class CourseCards extends StatelessWidget {
   List<String> imagesBunch = [];
   Color cardColor;
   CourseCards(this.courseName, this.courseDescription, this.courseImage,
-      this.courseStatus, this.imagesBunch, this.cardColor);
+      this.courseStatus, this.imagesBunch, this.cardColor,
+      {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -310,7 +307,8 @@ class RecentCards extends StatelessWidget {
   List<String> imagesBunch = [];
   Color cardColor;
   RecentCards(this.courseName, this.courseDescription, this.courseImage,
-      this.courseStatus, this.imagesBunch, this.cardColor);
+      this.courseStatus, this.imagesBunch, this.cardColor,
+      {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -327,7 +325,7 @@ class RecentCards extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
+            const SizedBox(
               width: 60,
             ),
             Expanded(
@@ -352,7 +350,7 @@ class RecentCards extends StatelessWidget {
                 ],
               ),
             ),
-            VerticalDivider(),
+            const VerticalDivider(),
             Container(
               height: 50,
               width: 50,
